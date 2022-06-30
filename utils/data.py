@@ -80,7 +80,7 @@ class PreprintsDataset:
 
 class PreprintsDataModule(pl.LightningDataModule):
 
-  def __init__(self, train_df, valid_df, test_df, tokenizer, batch_size=8, max_token_len=128, n_workers=2):
+  def __init__(self, train_df, valid_df, test_df, tokenizer, batch_size=8, max_token_len=128, n_workers=4):
     super().__init__()
     self.batch_size = batch_size
     self.train_df = train_df
