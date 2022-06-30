@@ -1,45 +1,49 @@
+from pathlib import Path
 import torch
 import torch.nn as nn
-from transformers import AutoTokenizer, AutoModel 
+from transformers import AutoConfig, AutoTokenizer, AutoModel 
 import pytorch_lightning as pl
 
 
-# ----------------------------------------------------------------------------------------------------------
-# ------------------------------------------ Inference nn.Module -------------------------------------------
-# ----------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
+# ------------------------------------------ Inference nn.Module -----------------------------
+# --------------------------------------------------------------------------------------------
+ 
 
 class Tagger(nn.Module):
-  """
-  Minimal model class just for inference
-  """
-  def __init__(self):
-    super().__init__()
-    self.bert_model_name='distilbert-base-uncased'
-    self.label_names=['ml', 'cs', 'ph', 'mth', 'bio', 'fin']
-    self.bert = AutoModel.from_pretrained(self.bert_model_name, return_dict=True)
-    self.classifier = nn.Linear(self.bert.config.hidden_size, len(self.label_names))
-    self.sigmoid_fnc = torch.nn.Sigmoid()
+    """
+    Minimal model class just for inference
+    """
+    def __init__(self):
+        super().__init__()
+        self.bert_model_name='distilbert-base-uncased'
+        self.label_names=['ml', 'cs', 'ph', 'mth', 'bio', 'fin']
+        config = AutoConfig.from_pretrained(self.bert_model_name)
+        self.bert =  AutoModel.from_config(config)
+        self.classifier = nn.Linear(self.bert.config.hidden_size, len(self.label_names))
+        self.sigmoid_fnc = torch.nn.Sigmoid()
     
-  def forward(self, input_ids, attention_mask):
-    output = self.bert(input_ids, attention_mask=attention_mask)
-    output = self.classifier(output.last_hidden_state[:,0]) #taking the ouput from [CLS] token 
-    output = self.sigmoid_fnc(output)    
-    return output
+    def forward(self, input_ids, attention_mask):
+        output = self.bert(input_ids, attention_mask=attention_mask)
+        output = self.classifier(output.last_hidden_state[:,0]) #taking the ouput from [CLS] token 
+        output = self.sigmoid_fnc(output)    
+        return output
 
 
-# ----------------------------------------------------------------------------------------------------------
-# ------------------------------------------ Inference functions -------------------------------------------
-# ----------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
+# ------------------------------------------ Inference functions -----------------------------
+# --------------------------------------------------------------------------------------------
 
 def model_fn(model_dir):
     model = Tagger()
     with open(Path(model_dir) / 'model.pth', 'rb') as f:
         model.load_state_dict(torch.load(f))
     tokenizer = AutoTokenizer.from_pretrained(model.bert_model_name)
-    return model, tokenizer
+    return model, tokenizer 
     
 
-def predict_fn(abstract, model, tokenizer, label_nms):   
+def predict_fn(abstract, model, tokenizer):   
+    label_nms = ['Machine Learning', 'Computer Science', 'Physics', 'Mathematics', 'Biology', 'Finance-Economics']
     # Tokenize abstract
     encoded_input = tokenizer.encode_plus(
         abstract,
