@@ -1,0 +1,20 @@
+general:
+  cwdir: ${hydra:runtime.cwd}
+dataset:
+  test: 'data/test_set.csv'
+  folds: 'data/train_5folds.csv'
+  fold: 0
+  label_names: ['ml', 'cs', 'ph', 'mth', 'bio', 'fin']
+train:
+  pre_model_name: distilbert-base-uncased
+  lr: 1e-4
+  warmup_percentage: 0.15
+  batch_size: 32
+  n_epochs: 4
+  use_gpu: True
+  model_dir: model
+  show_bar: True
+  max_token_len: 512
+logs:
+  log_project: nlp_project
+  log_pr_name: preprints
