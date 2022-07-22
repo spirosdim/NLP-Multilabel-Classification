@@ -7,6 +7,6 @@ The scope of this project is to apply a number of tools on solving a machine lea
 - [X] Visualize the data (pandas, seaborn, matplotlib)
 - [X] fine-tune a BERT family model (transformers, pytorch, pytorch-lightning, hydra) 
 - [ ] hyperparameter search (wandb sweep)
-- [ ] inference script 
+- [X] inference script 
 - [ ] Docker file for inference
 - [ ] convert to onnx 
