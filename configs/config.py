@@ -14,7 +14,9 @@ class Dataset:
 @dataclass
 class Train:
     pre_model_name: str
-    lr: float
+    learning_rate: float
+    weight_decay: float
+    p_dropout: float
     warmup_percentage: float
     batch_size: int
     n_epochs: int

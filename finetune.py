@@ -18,7 +18,7 @@ from omegaconf import OmegaConf, DictConfig
 from configs.config import TypesConfig
 
 from utils.data import get_fold, PreprintsDataset, PreprintsDataModule
-from utils.trainer_model import PreprintsTagger
+from utils.trainer_model import ModelTagger, PreprintsTagger
 
 
 cs = ConfigStore.instance()
@@ -36,12 +36,12 @@ def finetune(cfg: DictConfig):
     
     # get the model
     model = PreprintsTagger( 
-      lr=cfg.train.lr,
-      bert_model_name = cfg.train.pre_model_name, 
+      net=ModelTagger(p_dropout=cfg.train.p_dropout, label_names=cfg.dataset.label_names),
+      lr=cfg.train.learning_rate,
+      wd=cfg.train.weight_decay,
       n_warmup_steps=warmup_steps,
       n_training_steps=total_training_steps,
-      label_names=cfg.dataset.label_names
-    )
+      )
     
     # get the tokenizer and the datamodule
     tokenizer = AutoTokenizer.from_pretrained(cfg.train.pre_model_name)
