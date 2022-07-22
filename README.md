@@ -13,9 +13,12 @@ The scope of this project is to apply a number of tools on solving a deep learni
 - [ ] testing (pytest)
 
 
+## Data Collection and Visualization
+To see how the dataset is downloaded and some visualization to inspect it, see `DataCollectVisual.ipynb`.
 
 ## Hyperparameter tuning using Sweep from WandB
 On the terminal: 
-    1. `wandb login `
-    2. `wandb sweep sweep.yaml`
-    3. `wandb agent <name_of_sweep_shown_on_step2> --count 10`
+
+* `wandb login`
+* `wandb sweep sweep.yaml`
+* `wandb agent <name_of_sweep_shown_on_step2> --count 10`
