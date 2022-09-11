@@ -7,3 +7,5 @@ pytorch-lightning
 transformers
 hydra-core
 wandb
+onnx
+onnxruntime

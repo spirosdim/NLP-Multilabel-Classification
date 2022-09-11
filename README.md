@@ -9,8 +9,7 @@ The scope of this project is to apply a number of tools on solving a deep learni
 - [X] hyperparameter search (wandb sweep)
 - [X] inference script 
 - [ ] Docker file for inference
-- [ ] convert to onnx 
-- [ ] testing (pytest)
+- [X] convert to onnx 
 
 
 ## Data Collection and Visualization
@@ -21,4 +20,4 @@ On the terminal:
 
 * `wandb login`
 * `wandb sweep sweep.yaml`
-* `wandb agent <name_of_sweep_shown_on_step2> --count 10`
+* `wandb agent <name_of_sweep_displayed_from_step2> --count 10`
