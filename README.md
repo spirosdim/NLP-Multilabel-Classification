@@ -1,5 +1,5 @@
 # NLP-Multilabel-Classification
-The scope of this project is to apply a number of tools on solving a deep learning task. An NLP Multilabel classification problem is chosen.
+The scope of this side-project is to apply a number of tools on solving a deep learning task. An NLP Multilabel classification problem is chosen.
 
 ## To DO:
 
