@@ -8,7 +8,7 @@ The scope of this project is to apply a number of tools on solving a deep learni
 - [X] fine-tune a BERT family model (transformers, pytorch, pytorch-lightning, hydra) 
 - [X] hyperparameter search (wandb sweep)
 - [X] inference script 
-- [ ] Docker file for inference
+- [X] Docker file for inference
 - [X] convert to onnx 
 
 
