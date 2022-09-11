@@ -11,6 +11,13 @@ The scope of this project is to apply a number of tools on solving a deep learni
 - [X] Docker file for inference
 - [X] convert to onnx 
 
+## Create an environment
+The project dependencies can be installed as follows (using [miniconda](https://docs.conda.io/en/latest/miniconda.html)):
+
+* `conda create --name nlp_abstracts python=3.9 -y`
+* `conda activate nlp_abstracts`
+* `pip install -r requirements.txt`
+* `python -m ipykernel install --user --name=nlp_abstracts`
 
 ## Data Collection and Visualization
 To see how the dataset is downloaded and some visualization to inspect it, see `DataCollectVisual.ipynb`.
